@@ -5,4 +5,4 @@ Instructions:
 
 Compile: make filter
 
-Run: ./filter <input image> <filter type: "sobel", "blur", "unsharp"> <output image (not required)>
+Run: ./filter <input image (Ex. tommy.bmp)> <filter type: "sobel", "blur", "unsharp"> <output image (Ex. tommy-sobel.bmp)>
