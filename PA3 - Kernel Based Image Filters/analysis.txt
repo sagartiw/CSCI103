@@ -1,0 +1,85 @@
+1. Padding design: If we restrict the size of the Gaussian kernels 
+to odd integers between 3 and 11 inclusive, and we only allow 256x256 
+pixel images, what is the size of the largest padded image needed to 
+handle padding with any kernel size? At what index will the 
+upper-left pixel of the original image be placed in the padded image 
+(answer in terms of N, the kernel size)? At what index in the padded 
+array will the lower-right pixel of the original image be placed?
+
+	If we have a kernel size of N, we will need to add N-1 to our 
+	256x256 pixel dimensions. For example, with a 3x3 kernel, we 
+	surround the entire image with a square outline with a width 
+	of 1, making the 256x256 image a 258x258 padded image. As 
+	such, the largest padded image, one that will handle an 11x11 
+	kernel, will have a dimension of 266x266. The upper left pixel of 
+	the original image in a padded image will be at ((N-1)/2, (N-1)/2).
+	The lower right pixel of the original image in a padded image will
+	be at ((N-1)/2 + 256, (N-1)/2 + 256).
+
+2. Kernel Design: Manually compute the raw and normalized Gaussian 
+kernels for N=3, sigma=2. Use 4 decimal places. Discuss what would 
+happen to the image if we used the raw kernel values.
+	
+	RAW Gaussian Kernel:
+	0.6514	0.8072	0.6514
+	0.8072	1.0000	0.8072
+	0.6514	0.8072	0.6514
+
+	Normalized Gaussian Kernel:
+	0.0953	0.1181	0.0953
+	0.1181	0.1463	0.1181
+	0.0953	0.1181	0.0953
+
+	If we used the raw kernels, the sum of our kernel would be greater
+	than one. This would result in a much brighter image, acting almost
+	like a scaling effect.
+
+3. Filter the same image with the Gaussian blur filter while varying 
+N and sigma. If you hold N constant and vary sigma, what do you see? 
+Conversely, if you vary N and hold sigma the same, what do you see?
+
+	If you increase sigma while holding N constant, the image becomes
+	blurrier. If you decrease sigma, the image becomes clearer/closer
+	to the original input.
+	
+	If you increase N while holding sigma constant, I see the image 
+	getting darker overall. If you decrease N, then the image becomes
+	brighter overall.
+
+4. Filter a few images with the Sobel filter? What does the Sobel 
+filter appear to ‘do’? 
+	
+	The Sobel filter performs edge detection on the image. Essentially,
+	what the kernel is doing is taking the values surrounding the pixel
+	in question and disregards the pixel itself (this is why in the h1
+	and h2 kernels, the middle value is zero). As a result of applying
+	this filter on the image, we produce an image that is nearly black 
+	and white, where the edges of all of the objects starkly contrast
+	the rest of the image.
+
+5. The Gaussian blur filter and the unsharp mask filter can be thought 
+of as inverses of each other. Blur an image with the Gaussian blur and 
+then attempt to un-blur it using unsharp-mask. Do you get the original 
+image back? Provide a 2-3 sentence explanation for why you do not 
+recover the original (i.e. they are not inverse operations).
+
+	If we look at the process of creating the unsharp mask filter, we
+	see that we have to do two major steps: we have to create
+	a detail map by doing D = IM - Blur, and then we have to create the
+	sharpened image by doing S = IM + alpha*D. Looking at the second part
+	of this process, it becomes clear why we don't retrieve the exact image
+	back. The alpha serves as a scalar to the detail map, resulting in the
+	pixel values being contingent upon the alpha, consequently proving
+	that blur and unsharp are not inverses.
+
+6. Express in mathematical terms how the number of calculations your 
+program does grows with the size, N, of the kernel.
+
+	Since the kernel is of the size NxN, the number of calculations 
+	for each pixel is equal to N^2. Specifically, the output value 
+	of the middle pixel is calculated as the summation of 
+	padded[y + i][x + j][k]*kernel[N/2 + i][N/2 + j]. In a 3x3 kernel,
+	that would mean the middle pixel is some combination of the 9 pixels
+	in the kernel.
+
+
