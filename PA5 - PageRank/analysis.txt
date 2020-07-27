@@ -1,0 +1,21 @@
+CSCI 103 Programming Assignment 5, Pagerank , Spring 2019
+
+Name: Sagar Tiwari
+
+Email Address: sagartiw@usc.edu
+
+NOTE: You can delete the questions, we only need your responses.
+
+=============================== Prelab =======================================
+Work:
+PA(0) + PA(1) + PA(2) + PA(3) = 1
+PA(0) = PA(1) + PA(3)
+PA(1) = PA(0)/2
+PA(2) = 0
+PA(3) = PA(1)
+PA(0) + PA(0)/2 + PA(0)/2 = 1
+Calcuate the pagerank of the pages in the graph you generated.
+PR(id=0) = 1/2
+PR(id=1) = 1/4
+PR(id=2) = 0
+PR(id=3) = 1/4
