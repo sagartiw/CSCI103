@@ -5,5 +5,3 @@ Instructions:
 Compile: make
 
 Run: ./filesys terminal
-
-Testing: ./filesys test_mlist <0-6>, ./filesys test_os <1, 2>
